@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.szdhc.dao.WxUserDao">
+  <resultMap id="BaseResultMap" type="com.szdhc.pojo.WxUser">
+    <result column="uid" jdbcType="VARCHAR" property="uid" />
+    <result column="sessionkey" jdbcType="VARCHAR" property="sessionkey" />
+    <result column="skey" jdbcType="VARCHAR" property="skey" />
+    <result column="uavatar" jdbcType="VARCHAR" property="uavatar" />
+    <result column="uname" jdbcType="VARCHAR" property="uname" />
+    <result column="ugender" jdbcType="INTEGER" property="ugender" />
+    <result column="uaddress" jdbcType="VARCHAR" property="uaddress" />
+    <result column="ubalance" jdbcType="INTEGER" property="ubalance" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updateTime" jdbcType="TIMESTAMP" property="updatetime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    uid, sessionkey, skey, uavatar, uname, ugender, uaddress, ubalance, createTime, updateTime
+  </sql>
+  <select id="selectByExample" parameterType="com.szdhc.pojo.WxUserExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from wx_user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.szdhc.pojo.WxUserExample">
+    delete from wx_user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.szdhc.pojo.WxUser">
+    insert into wx_user (uid, sessionkey, skey, 
+      uavatar, uname, ugender, 
+      uaddress, ubalance, createTime, 
+      updateTime)
+    values (#{uid,jdbcType=VARCHAR}, #{sessionkey,jdbcType=VARCHAR}, #{skey,jdbcType=VARCHAR}, 
+      #{uavatar,jdbcType=VARCHAR}, #{uname,jdbcType=VARCHAR}, #{ugender,jdbcType=INTEGER}, 
+      #{uaddress,jdbcType=VARCHAR}, #{ubalance,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{updatetime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.szdhc.pojo.WxUser">
+    insert into wx_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="uid != null">
+        uid,
+      </if>
+      <if test="sessionkey != null">
+        sessionkey,
+      </if>
+      <if test="skey != null">
+        skey,
+      </if>
+      <if test="uavatar != null">
+        uavatar,
+      </if>
+      <if test="uname != null">
+        uname,
+      </if>
+      <if test="ugender != null">
+        ugender,
+      </if>
+      <if test="uaddress != null">
+        uaddress,
+      </if>
+      <if test="ubalance != null">
+        ubalance,
+      </if>
+      <if test="createtime != null">
+        createTime,
+      </if>
+      <if test="updatetime != null">
+        updateTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="uid != null">
+        #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="sessionkey != null">
+        #{sessionkey,jdbcType=VARCHAR},
+      </if>
+      <if test="skey != null">
+        #{skey,jdbcType=VARCHAR},
+      </if>
+      <if test="uavatar != null">
+        #{uavatar,jdbcType=VARCHAR},
+      </if>
+      <if test="uname != null">
+        #{uname,jdbcType=VARCHAR},
+      </if>
+      <if test="ugender != null">
+        #{ugender,jdbcType=INTEGER},
+      </if>
+      <if test="uaddress != null">
+        #{uaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="ubalance != null">
+        #{ubalance,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.szdhc.pojo.WxUserExample" resultType="java.lang.Long">
+    select count(*) from wx_user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update wx_user
+    <set>
+      <if test="record.uid != null">
+        uid = #{record.uid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sessionkey != null">
+        sessionkey = #{record.sessionkey,jdbcType=VARCHAR},
+      </if>
+      <if test="record.skey != null">
+        skey = #{record.skey,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uavatar != null">
+        uavatar = #{record.uavatar,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uname != null">
+        uname = #{record.uname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ugender != null">
+        ugender = #{record.ugender,jdbcType=INTEGER},
+      </if>
+      <if test="record.uaddress != null">
+        uaddress = #{record.uaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ubalance != null">
+        ubalance = #{record.ubalance,jdbcType=INTEGER},
+      </if>
+      <if test="record.createtime != null">
+        createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updatetime != null">
+        updateTime = #{record.updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update wx_user
+    set uid = #{record.uid,jdbcType=VARCHAR},
+      sessionkey = #{record.sessionkey,jdbcType=VARCHAR},
+      skey = #{record.skey,jdbcType=VARCHAR},
+      uavatar = #{record.uavatar,jdbcType=VARCHAR},
+      uname = #{record.uname,jdbcType=VARCHAR},
+      ugender = #{record.ugender,jdbcType=INTEGER},
+      uaddress = #{record.uaddress,jdbcType=VARCHAR},
+      ubalance = #{record.ubalance,jdbcType=INTEGER},
+      createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      updateTime = #{record.updatetime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

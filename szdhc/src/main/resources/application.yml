@@ -1,0 +1,105 @@
+server:
+    port: 8080
+#httpClient配置---------------------------------------------------------------------------------------------
+httpclient:
+    config:
+        # 代理的host
+        proxyhost: 192.168.1.101
+        # 代理端口
+        proxyPort: 8080
+        # 连接超时或异常重试次数
+        retryTime: 3
+        # 长连接保持时间，单位为s
+        keepAliveTime: 30
+        # 连接池最大连接数
+        connMaxTotal: 20
+        maxPerRoute: 20
+        # 连接超时时间，单位ms
+        connectTimeout: 2000
+        # 请求超时时间
+        connectRequestTimeout: 2000
+        # sock超时时间
+        socketTimeout: 2000
+        # 连接存活时间，单位s
+        timeToLive: 60
+
+spring:
+    profiles:
+      active: dev
+    session:
+        store-type: none
+    #redis jedis配置---------------------------------------------------------------------------------------------
+    redis:
+        # Redis数据库索引（默认为0）
+        database: 0
+        # Redis服务器地址1
+        node1:
+          host: 192.168.1.100
+          port: 6380
+        # Redis服务器地址2
+        node2:
+          host: 192.168.1.100
+          port: 6381
+        # Redis服务器地址3
+        node3:
+          host: 192.168.1.100
+          port: 6382
+         # Redis服务器地址4
+        node4:
+          host: 192.168.1.100
+          port: 6383
+        # Redis服务器地址5
+        node5:
+          host: 192.168.1.100
+          port: 6384
+       # Redis服务器地址6
+        node6:
+          host: 192.168.1.100
+          port: 6385
+      # Redis服务器连接密码（默认为空）
+      #spring.redis.password:
+        pool:
+            # 连接池最大连接数（使用负值表示没有限制）
+            max-active: 200
+            # 连接池最大阻塞等待时间（使用负值表示没有限制）
+            max-wait: -1
+            # 连接池中的最大空闲连接
+            max-idle: 8
+            # 连接池中的最小空闲连接
+            min-idle: 0
+          # 连接超时时间（毫秒）
+        timeout: 0
+        max_attempts: 10
+        so_timeout : 200
+        connection_timeout : 2000
+    datasource:
+        name: test
+        url: jdbc:mysql://192.168.1.100:3306/szdhc?serverTimezone=UTC
+        username: root
+        password: abc123
+        # 使用druid数据源
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        filters: stat
+        maxActive: 20
+        initialSize: 1
+        maxWait: 60000
+        minIdle: 1
+        timeBetweenEvictionRunsMillis: 60000
+        minEvictableIdleTimeMillis: 300000
+        validationQuery: select 'x'
+        testWhileIdle: true
+        testOnBorrow: false
+        testOnReturn: false
+        poolPreparedStatements: true
+        maxOpenPreparedStatements: 20
+
+#公共配置与profiles选择无关
+mybatis:
+    typeAliasesPackage: com.szdhc.pojo
+    mapperLocations: classpath:mapping/*.xml
+
+# 打印sql
+logging:
+  level:
+     com.cgv.mapper : debug
