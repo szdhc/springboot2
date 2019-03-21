@@ -11,9 +11,9 @@
             <property name="suppressAllComments" value="true" />
         </commentGenerator>
         <!--数据库连接的信息：驱动类、连接地址、用户名、密码 -->
-        <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
-                        connectionURL="jdbc:mysql://localhost:3306/cgv?serverTimezone=UTC" userId="root"
-                        password="abc123">
+        <jdbcConnection driverClass="org.postgresql.Driver"
+                        connectionURL="jdbc:postgresql://172.21.20.150:5432/springbootdb" userId="postgres"
+                        password="dhc123">
         </jdbcConnection>
         <!-- 数据库连接配置 sqlserver-->
         <!--<jdbcConnection driverClass="com.microsoft.sqlserver.jdbc.SQLServerDriver"
@@ -55,7 +55,7 @@
             <property name="enableSubPackages" value="false" />
         </javaClientGenerator>
         <!-- 指定数据库表 -->
-        <table tableName="wx_user" schema=""/>
+        <table tableName="goods" schema=""/>
 
         <!-- <table schema="" tableName="T_Qk_Orders"></table>
         <table schema="" tableName="T_Qk_Orderitem"></table>
